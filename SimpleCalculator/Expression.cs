@@ -1,9 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace SimpleCalculator
 {
@@ -28,7 +23,7 @@ namespace SimpleCalculator
             Match m = r.Match(arg);
             if (m.Success)
             {
-                // has operator
+                // user input has operator, so user has entered a calculation/assignment
                 r = new Regex(@"^(?<value1>\w+)\s*(?<operator>[+\/\-%*=])\s*(?<value2>\w+)\s*$", RegexOptions.IgnoreCase);
                 m = r.Match(arg);
                 if (m.Success)
@@ -42,7 +37,7 @@ namespace SimpleCalculator
             }
             else
             {
-                // has no operator
+                // user input has no operator, so user has not entered a calculation/assignment
                 r = new Regex(@"^\s*\w+\s*$", RegexOptions.IgnoreCase);
                 m = r.Match(arg);
                 if (m.Success)  return new string[] { arg.Trim() };

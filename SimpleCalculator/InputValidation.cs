@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SimpleCalculator
 {
@@ -15,6 +11,8 @@ namespace SimpleCalculator
             int firstOpNum, secondOpNum;
             firstOp = args[0];
             bool isNumeric1 = int.TryParse(firstOp, out firstOpNum);
+
+            // check if args[] contains exit command || last/lastq command
             if (args.Length == 1)
             {
                 if (!isNumeric1 && firstOp.Length > 1)
@@ -32,6 +30,7 @@ namespace SimpleCalculator
                             return "invalid";
                     }
                 }
+                // check if args[] contains existing constant
                 else if (!isNumeric1 && firstOp.Length == 1)
                 {
                     return "getConstant";
@@ -46,12 +45,14 @@ namespace SimpleCalculator
 
                 if (myOperator == "=")
                 {
+                    // Check if constant is being assigned an int
                     if (Char.IsLetter(firstOp, 0) && firstOp.Length == 1 && isNumeric2)
                     {
                         return "saveConstant";
                     }
                     else return "invalid";
                 }
+                // check if args[] contains invalid user input (constant longer than one char)
                 else
                 {
                     if ((!isNumeric1 && firstOp.Length > 1) || (!isNumeric2 && secondOp.Length > 1))
